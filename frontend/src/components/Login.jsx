@@ -30,16 +30,17 @@ function Login() {
 
       const data = await res.json();
 
-      if (!res.ok) {
-        alert(data?.message || "Login failed");
-        return;
-      }
+    if (!res.ok) {
+  alert(data?.message || "Login failed");
+  return;
+}
 
-      // ================= AUTH SAVE =================
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("user", JSON.stringify(data.user || {}));
+// ================= AUTH SAVE =================
+localStorage.setItem("isLoggedIn", "true");
+localStorage.setItem("token", data.token);
+localStorage.setItem("user", JSON.stringify(data.user || {}));
 
-      navigate("/");
+navigate("/");
 
     } catch (err) {
       console.error("Login error:", err);

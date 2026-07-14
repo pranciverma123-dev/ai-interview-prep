@@ -2,7 +2,7 @@
 const OpenAI = require("openai");
 
 const client = new OpenAI({
- apiKey: "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",
+  apiKey: process.env.GROQ_API_KEY,
   baseURL: "https://api.groq.com/openai/v1",
 });
 

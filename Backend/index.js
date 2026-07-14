@@ -1,3 +1,7 @@
+
+require("dotenv").config();
+console.log("GROQ:", process.env.GROQ_API_KEY);
+console.log("MONGO:", process.env.MONGO_URI);
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -13,10 +17,9 @@ const atsRoutes = require("./routes/ats");
 
 const app = express();
 
-// ✅ CORS FIXED FOR PRODUCTION
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -25,11 +28,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// ✅ MONGODB CONNECTION (OK FOR NOW)
-mongoose
-  .connect(
-    "mongodb+srv://pranciverma123_db_user:1ByDHWG3KxHyPP7n@cluster0.4locgwt.mongodb.net/aii?retryWrites=true&w=majority"
-  )
+
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("MongoDB Error:", err));
 
