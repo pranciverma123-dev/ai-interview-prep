@@ -2,6 +2,9 @@
 ### *AI-Powered Interview Simulation, DSA Practice & ATS Resume Builder*
 
 An intelligent full-stack platform that helps users prepare for interviews through AI-generated questions, skill analysis, company-based DSA practice, feedback system, and ATS resume generation.
+Live Demo: https://ai-interview-prep-omega-coral.vercel.app
+
+Backend API: https://ai-interview-prep-ffjr.onrender.com
 
 ---
 
