@@ -18,7 +18,7 @@ function ForgotPassword() {
 
     try {
     const res = await fetch(
-  "http://localhost:8000/user/forgot-password",
+  "https://ai-interview-prep-ffjr.onrender.com/user/forgot-password",
   {
     method: "POST",   
     headers: {

@@ -15,15 +15,18 @@ function DSA() {
 
   const [runResult, setRunResult] = useState(null);
   const [solveResult, setSolveResult] = useState(null);
+  const token = localStorage.getItem("token");
 
   const generateQuestions = async () => {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:8000/api/dsa", {
+      const res = await fetch("https://ai-interview-prep-ffjr.onrender.com/api/dsa", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+       headers: {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${token}`,
+},
         body: JSON.stringify({
           company,
           difficulty,
@@ -62,10 +65,12 @@ function DSA() {
       const code = codeMap[activeQuestionIndex] || "";
       const currentQuestion = questions[activeQuestionIndex];
 
-      const res = await fetch("http://localhost:8000/api/run-code", {
+      const res = await fetch("https://ai-interview-prep-ffjr.onrender.com/api/run-code", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+      headers: {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${token}`,
+},
         body: JSON.stringify({
           code,
           language,
@@ -87,10 +92,12 @@ function DSA() {
     try {
       const code = codeMap[activeQuestionIndex] || "";
 
-      const res = await fetch("http://localhost:8000/api/dsa/solve", {
+      const res = await fetch("https://ai-interview-prep-ffjr.onrender.com/api/dsa/solve", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+      headers: {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${token}`,
+},
         body: JSON.stringify({
           question,
           code,

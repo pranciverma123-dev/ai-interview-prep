@@ -18,7 +18,7 @@ function Login() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:8000/user/login", {
+      const res = await fetch("https://ai-interview-prep-ffjr.onrender.com/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -17,7 +17,7 @@ function InterviewPage() {
   const load = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8000/api/interview/${id}`,
+        `https://ai-interview-prep-ffjr.onrender.com/api/interview/${id}`,
         { credentials: "include" }
       );
 

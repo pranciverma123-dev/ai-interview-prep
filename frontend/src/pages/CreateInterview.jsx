@@ -16,42 +16,49 @@ function CreateInterview() {
   const [performance, setPerformance] = useState("");
 
   // ================= CREATE INTERVIEW =================
-  const createInterview = async () => {
-    if (!role.trim()) return alert("Please enter a role");
+ const createInterview = async () => {
+  if (!role.trim()) return alert("Please enter a role");
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      const res = await fetch("http://localhost:8000/api/interview/create", {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(
+      "https://ai-interview-prep-ffjr.onrender.com/api/interview/create",
+      {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
           role,
           experience,
           difficulty,
           questionCount: Number(questionCount),
         }),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        setInterview(data.interview);
-        setAnswers({});
-        setEvaluation(null);
-        setFinalScore(null);
-        setPerformance("");
-      } else {
-        alert(data.message || "Failed");
       }
-    } catch (err) {
-      console.log(err);
-      alert("Server Error");
-    } finally {
-      setLoading(false);
+    );
+
+    const data = await res.json();
+
+    if (data.success) {
+      setInterview(data.interview);
+      setAnswers({});
+      setEvaluation(null);
+      setFinalScore(null);
+      setPerformance("");
+    } else {
+      alert(data.message || "Failed");
     }
-  };
+  } catch (err) {
+    console.log(err);
+    alert("Server Error");
+  } finally {
+    setLoading(false);
+  }
+};
 
   // ================= ANSWER CHANGE =================
   const handleAnswerChange = (index, value) => {
@@ -62,43 +69,50 @@ function CreateInterview() {
   };
 
   // ================= SUBMIT INTERVIEW =================
-  const submitInterview = async () => {
-    if (!interview) return;
+ const submitInterview = async () => {
+  if (!interview) return;
 
-    const formattedAnswers = interview.questions.map((q, index) => ({
-      question: q.question,
-      answer: answers[index] || "",
-    }));
+  const formattedAnswers = interview.questions.map((q, index) => ({
+    question: q.question,
+    answer: answers[index] || "",
+  }));
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      const res = await fetch("http://localhost:8000/api/interview/submit", {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(
+      "https://ai-interview-prep-ffjr.onrender.com/api/interview/submit",
+      {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
           interviewId: interview._id,
           answers: formattedAnswers,
         }),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        setEvaluation(data.evaluation);
-        setFinalScore(data.finalScore);
-        setPerformance(data.performance);
-      } else {
-        alert(data.message || "Submit failed");
       }
-    } catch (err) {
-      console.log(err);
-      alert("Server Error");
-    } finally {
-      setLoading(false);
+    );
+
+    const data = await res.json();
+
+    if (data.success) {
+      setEvaluation(data.evaluation);
+      setFinalScore(data.finalScore);
+      setPerformance(data.performance);
+    } else {
+      alert(data.message || "Submit failed");
     }
-  };
+  } catch (err) {
+    console.log(err);
+    alert("Server Error");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen px-4 py-10 flex flex-col items-center bg-[#050505] text-white">

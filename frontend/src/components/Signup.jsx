@@ -20,7 +20,7 @@ function Signup() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:8000/user/signup", {
+      const res = await fetch("https://ai-interview-prep-ffjr.onrender.com/user/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

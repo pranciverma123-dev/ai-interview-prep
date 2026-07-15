@@ -19,7 +19,7 @@ function Skills() {
     try {
       setLoadingSkills(true);
 
-      const res = await fetch("http://localhost:8000/api/ai/skills", {
+      const res = await fetch("https://ai-interview-prep-ffjr.onrender.com/api/ai/skills", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role }),
@@ -58,43 +58,48 @@ function Skills() {
   };
 
   // ================= CREATE INTERVIEW =================
-  const handleCreateInterview = async () => {
-    if (!role.trim()) return alert("Role required");
-    if (!selectedSkills.length)
-      return alert("Select at least one skill");
+ const handleCreateInterview = async () => {
+  if (!role.trim()) return alert("Role required");
+  if (!selectedSkills.length)
+    return alert("Select at least one skill");
 
-    try {
-      setCreatingInterview(true);
+  try {
+    setCreatingInterview(true);
 
-      const res = await fetch(
-        "http://localhost:8000/api/ai/interview",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            role,
-            skills: selectedSkills,
-            difficulty,
-            questionTypes: ["mcq", "code", "text"],
-            questionCount: Number(questionCount),
-          }),
-        }
-      );
+    const token = localStorage.getItem("token");
 
-      const data = await res.json();
-
-      if (data.success && data.interview) {
-        setInterview(data.interview);
-      } else {
-        alert(data.message || "Failed to create interview");
+    const res = await fetch(
+      "https://ai-interview-prep-ffjr.onrender.com/api/ai/interview",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          role,
+          skills: selectedSkills,
+          difficulty,
+          questionTypes: ["mcq", "code", "text"],
+          questionCount: Number(questionCount),
+        }),
       }
-    } catch (err) {
-      console.log(err);
-      alert("Server error");
-    } finally {
-      setCreatingInterview(false);
+    );
+
+    const data = await res.json();
+
+    if (data.success && data.interview) {
+      setInterview(data.interview);
+    } else {
+      alert(data.message || "Failed to create interview");
     }
-  };
+  } catch (err) {
+    console.log(err);
+    alert("Server error");
+  } finally {
+    setCreatingInterview(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#050505] text-white p-6 relative overflow-hidden">

@@ -28,7 +28,7 @@ function VerifyOTP() {
       setLoading(true);
 
       const res = await fetch(
-        "http://localhost:8000/user/verify-otp",
+        "https://ai-interview-prep-ffjr.onrender.com/user/verify-otp",
         {
           method: "POST",
           headers: {

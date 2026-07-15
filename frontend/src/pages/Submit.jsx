@@ -1,7 +1,7 @@
 const submitAnswers = async () => {
   try {
     const res = await fetch(
-      "http://localhost:8000/api/feedback/submit-answers",
+      "https://ai-interview-prep-ffjr.onrender.com/api/feedback/submit-answers",
       {
         method: "POST",
         headers: {

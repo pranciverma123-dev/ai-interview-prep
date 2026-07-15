@@ -40,7 +40,7 @@ function ResetPassword() {
       setLoading(true);
 
       const res = await fetch(
-        "http://localhost:8000/user/reset-password",
+        "https://ai-interview-prep-ffjr.onrender.com/user/reset-password",
         {
           method: "PUT",
           headers: {

@@ -21,7 +21,7 @@ function CreateInter() {
     try {
       setLoadingSkills(true);
 
-      const res = await fetch("http://localhost:8000/api/ai/skills", {
+      const res = await fetch("https://ai-interview-prep-ffjr.onrender.com/api/ai/skills", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

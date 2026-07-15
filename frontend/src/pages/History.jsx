@@ -18,7 +18,7 @@ function History() {
       setError(null);
 
       const res = await fetch(
-        "http://localhost:8000/api/interview/history",
+        "https://ai-interview-prep-ffjr.onrender.com/api/interview/history",
         { credentials: "include" }
       );
 

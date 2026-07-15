@@ -13,7 +13,7 @@ function Profile() {
 
   const getProfile = async () => {
     try {
-      const res = await fetch("http://localhost:8000/user/profile", {
+      const res = await fetch("https://ai-interview-prep-ffjr.onrender.com/user/profile", {
         method: "GET",
         credentials: "include", // cookie auth
         headers: {

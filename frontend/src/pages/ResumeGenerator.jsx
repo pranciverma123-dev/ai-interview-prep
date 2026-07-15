@@ -15,7 +15,7 @@ function ResumeGenerator() {
   const generateResume = async () => {
     setLoading(true);
 
-    const res = await fetch("http://localhost:8000/api/resume/generate", {
+    const res = await fetch("https://ai-interview-prep-ffjr.onrender.com/api/resume/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
