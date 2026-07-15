@@ -1,8 +1,5 @@
 require("dotenv").config();
 
-console.log("GROQ:", process.env.GROQ_API_KEY);
-console.log("MONGO:", process.env.MONGO_URI);
-
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -35,15 +32,19 @@ app.use(
       }
     },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: [
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE",
+      "OPTIONS"
+    ],
     allowedHeaders: [
       "Content-Type",
       "Authorization"
     ]
   })
 );
-
-app.options("*", cors());
 
 
 // Middleware
